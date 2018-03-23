@@ -20,3 +20,46 @@ function getCookie(cname) {
     }
     return "";
 }
+
+function generateParamsUrl(user) {
+    var parameters = ["UID","UIDSig","timestamp","loginProvider","loginProviderUID","nickname","photoURL","thumbnailURL","firstName","lastName","gender","birthDay","birthMonth","birthYear","email","country","state","city","zip","profileURL","proxiedEmail","providers"];
+    var appendUrl = '';
+    for (i=0; i<parameters.length ; i++) {
+        if(user[parameters[i]]!='') {
+            appendUrl += parameters[i] + '=' + user[parameters[i]] + '&';
+        }
+    }
+    if(appendUrl!='') {
+        appendUrl ='?' + appendUrl.slice(0,-1);
+    }
+    return appendUrl;
+    /*var appendUrl = eventObj.user.UID + '&'
+        + eventObj.user.UIDSig + '&'
+        + eventObj.user.timestamp + '&'
+        + eventObj.user.loginProvider + '&'
+        + eventObj.user.loginProviderUID + '&'
+        + eventObj.user.nickname + '&'
+        + eventObj.user.photoURL + '&'
+        + eventObj.user.thumbnailURL + '&'
+        + eventObj.user.firstName + '&'
+        + eventObj.user.lastName + '&'
+        + eventObj.user.gender + '&'
+        + eventObj.user.birthDay + '&'
+        + eventObj.user.birthMonth + '&'
+        + eventObj.user.birthYear + '&'
+        + eventObj.user.email + '&'
+        + eventObj.user.country + '&'
+        + eventObj.user.state + '&'
+        + eventObj.user.city + '&'
+        + eventObj.user.zip + '&'
+        + eventObj.user.profileURL + '&'
+        + eventObj.user.proxiedEmail + '&'
+        + eventObj.user.providers;*/
+}
+
+function loggedTimes() {
+    var countLogin = getCookie('count-login');
+    if (countLogin != '') {
+        document.getElementById("loggedTimes").innerText = "Hooray, you logged in already " + countLogin + " times!";
+    }
+}

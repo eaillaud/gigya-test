@@ -97,9 +97,9 @@ body {
 }
 
 @media (min-width: 48em) {
-    .masthead-brand {
+    /*.masthead-brand {
         float: left;
-    }
+    }*/
     .nav-masthead {
         float: right;
     }

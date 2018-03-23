@@ -1,6 +1,6 @@
 FROM php:7.1-apache
 
-MAINTAINER Enrico Aillaud <eaillaud@ikomobi.com>
+MAINTAINER Enrico Aillaud <enrico.aillaud@yameveo.com>
 
 COPY . /var/www/html
 COPY .docker/vhost.conf /etc/apache2/sites-available/000-default.conf

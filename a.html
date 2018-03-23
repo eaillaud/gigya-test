@@ -12,14 +12,13 @@
             src="http://cdn.gigya.com/js/socialize.js?apiKey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N"></script>
     <title>Gigya Test</title>
 </head>
-<body class="text-center">
+<body class="text-center" onload="loggedTimes()";>
 
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
         <div class="inner">
-            <h3 class="masthead-brand"></h3>
-            <nav class="nav nav-masthead justify-content-center">
-            </nav>
+            <h5 class="masthead-brand" id="loggedTimes"></h5>
+            <nav class="nav nav-masthead justify-content-center"></nav>
         </div>
     </header>
     <main role="main" class="inner cover">
@@ -33,7 +32,7 @@
                 <input type="text" id="userEmail"/>
             </div>
             <div class="modal-footer">
-                <a href="http://localhost:8085/b.html" type="button" class="btn btn-primary">Save changes</a>
+                <a href="http://localhost:8085/b.html" id="confirmButton" type="button" class="btn btn-primary">Save changes</a>
             </div>
         </div>
         </p>

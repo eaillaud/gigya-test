@@ -24,7 +24,7 @@ function login() {
         redirectURL: "",
         context: context,
     };
-    params['onLogin'] = function (evt) {
+    /*params['onLogin'] = function (evt) {
         var countLogin = getCookie('count-login');
         if (countLogin === '') {
             countLogin = 1;
@@ -35,9 +35,34 @@ function login() {
         evt.user.email = '';
         if (evt.user.email === '') {
             modal.style.display = "block";
-        } else {
-            window.location = "http://localhost:8085/b.html";
         }
-    };
+    };*/
+
+    gigya.socialize.addEventHandlers({
+        onLogin: DisplayEventMessage
+    });
+
+    function DisplayEventMessage(eventObj) {
+        var countLogin = getCookie('count-login');
+        if (countLogin === '') {
+            countLogin = 1;
+        } else {
+            countLogin = parseInt(countLogin) + 1;
+        }
+        setCookie('count-login', countLogin, 30);
+        var paramsUrl = generateParamsUrl(eventObj.user);
+        var redirectUrl = "http://localhost:8085/b.html" + paramsUrl;
+        //eventObj.user.email = '';
+        if (eventObj.user.email === '') {
+            modal.style.display = "block";
+            document.getElementById("confirmButton").onclick = function (ev) {
+                document.getElementById("confirmButton").href = redirectUrl;
+            }
+        } else {
+            window.location = redirectUrl;
+        }
+    }
+
+
     gigya.socialize.showLoginUI(params);
 }
