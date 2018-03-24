@@ -26,15 +26,15 @@ function deleteCookie(cookieName) {
 }
 
 function generateParamsUrl(user) {
-    var parameters = ["UID","UIDSig","timestamp","loginProvider","loginProviderUID","nickname","photoURL","thumbnailURL","firstName","lastName","gender","birthDay","birthMonth","birthYear","email","country","state","city","zip","profileURL","proxiedEmail","providers"];
+    var parameters = ["UID", "UIDSig", "timestamp", "loginProvider", "loginProviderUID", "nickname", "photoURL", "thumbnailURL", "firstName", "lastName", "gender", "birthDay", "birthMonth", "birthYear", "email", "country", "state", "city", "zip", "profileURL", "proxiedEmail", "providers"];
     var appendUrl = '';
-    for (i=0; i<parameters.length ; i++) {
-        if(user[parameters[i]]!='') {
+    for (i = 0; i < parameters.length; i++) {
+        if (user[parameters[i]] != '') {
             appendUrl += parameters[i] + '=' + user[parameters[i]] + '&';
         }
     }
-    if(appendUrl!='') {
-        appendUrl ='?' + appendUrl.slice(0,-1);
+    if (appendUrl != '') {
+        appendUrl = '?' + appendUrl.slice(0, -1);
     }
     return appendUrl;
     /*var appendUrl = eventObj.user.UID + '&'
@@ -68,7 +68,7 @@ function loggedTimes() {
     }
 }
 
-function getUrlData(){
+function getUrlData() {
     var urlParamsArr = {};
     // Parse the URL parameters into urlParamsArr
     var urlParams = document.location.search.substr(1).split("&");
@@ -79,11 +79,6 @@ function getUrlData(){
     }
 
     return urlParamsArr;
-
-    // Inject the login provider
-    // YOUR MISSION:
-    //    Enhance the user experience by providing more detail from input parameters
-
 }
 
 function setConnections(user) {
@@ -92,10 +87,10 @@ function setConnections(user) {
     for (var i = 0; i < providers.length; i++) {
         var result = result + providers[i] + ',';
     }
-    if(result!='') {
-        result = result.slice(0,-1);
+    if (result != '') {
+        result = result.slice(0, -1);
     }
-    setCookie('current-connections',result,30);
+    setCookie('current-connections', result, 30);
 }
 
 function getConnections() {
