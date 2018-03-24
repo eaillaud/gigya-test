@@ -2,7 +2,7 @@
 
 Run docker with:    
 
-    docker-composer up --build
+    docker-compose up --build
     
 Access the web with:    
 
