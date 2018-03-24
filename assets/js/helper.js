@@ -108,7 +108,8 @@ function myOnLoad(evt) {
 }
 
 function myOnConnectionAdded(evt) {
-    setConnections();
+    setConnections(evt.user);
+    displayConnections();
 }
 
 function shareMeNow(){

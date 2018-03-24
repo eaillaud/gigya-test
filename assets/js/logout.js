@@ -30,12 +30,8 @@ function showData() {
 }
 
 function showConnection() {
-    var context = {
-        msg: 'This is my params.context.msg'
-    };
 
     var params = {
-        captionText: 'This is my caption text',
         headerText: 'Get Fully Connected!',
         containerID: 'showConnectionDiv',
         height: 100, // changing default add-on size
@@ -43,7 +39,6 @@ function showConnection() {
         UIConfig: '<config><body><texts color="white" size="20px"></texts><controls><snbuttons buttonsize="60"></snbuttons></controls><background background-color="transparent" frame-color="transparent"></background></body></config>',
         showTermsLink: false,
         showEditLink: false,
-        context: context
     };
 
     /*@todo event onLoad is not workin on addEventHandlers */
