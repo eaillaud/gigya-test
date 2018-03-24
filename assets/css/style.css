@@ -124,3 +124,17 @@ body {
 .mastfoot {
     color: rgba(255, 255, 255, .5);
 }
+
+/*
+ * Custom
+ */
+#fullLogout {
+    margin-left: 30px;
+}
+#fullLogout:hover {
+    background-color: firebrick;
+}
+#simpleLogout:hover {
+    background-color: darkseagreen;
+}
+

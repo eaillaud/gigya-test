@@ -12,7 +12,7 @@
             src="http://cdn.gigya.com/js/socialize.js?apiKey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N"></script>
     <title>Gigya Test</title>
 </head>
-<body class="text-center" onload="loggedTimes()";>
+<body class="text-center" onload="initLogin()";>
 
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
     <header class="masthead mb-auto">
@@ -38,6 +38,10 @@
         </p>
         <h1 class="cover-heading">Welcome Gigya Friends</h1>
         <p class="lead">Login Feature has never been so fast.</p>
+        <p class="lead alert alert-danger" id="errorLogin" style="display: none">
+              <strong>Uuuups!</strong> First you need to login ;)
+        </p>
+
         <p class="lead">
             <input type="button" class="btn btn-lg btn-secondary" onclick="login()" value="Login">
         </p>

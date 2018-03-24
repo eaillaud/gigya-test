@@ -8,11 +8,12 @@
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<script type="text/javascript" src="assets/js/helper.js"></script>
 	<script type="text/javascript" src="assets/js/login.js"></script>
+	<script type="text/javascript" src="assets/js/logout.js"></script>
 	<script type="text/javascript"
 			src="http://cdn.gigya.com/js/socialize.js?apiKey=2_Y82PzwJ_chSFImHXaIDJClnLyJzmk-VFOavSsaNTzl6m901s_NNxRAS0xJ3bd3_N"></script>
 	<title>Gigya Test</title>
 </head>
-<body class="text-center" onload="showConnection()">
+<body class="text-center" onload="initLogout()">
 
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
 	<header class="masthead mb-auto">
@@ -22,11 +23,12 @@
 		</div>
 	</header>
 	<main role="main" class="inner cover">
-		<h1 class="cover-heading">Welcome Gigya Friends</h1>
-		<p class="lead">You are currently connected with:</p>
+		<h1 class="cover-heading">Welcome <div id="userName"></div></h1>
+		<!-- <p class="lead"><div id="imageDiv"></div></p> -->
+		<p class="lead" id="userLoginProvider"></p>
 		<p class="lead" id="showCurrentConnections"></p>
 		<p class="lead">
-			<input type="button" class="btn btn-lg btn-secondary" onclick="logout()" value="Logout">
+			<input type="button" class="btn btn-lg btn-secondary" onclick="simpleLogout()" value="Simple Logout" id="simpleLogout"><!-- <input type="button" class="btn btn-lg btn-secondary" onclick="fullLogout()" value="Full Logout" id="fullLogout"> -->
 		</p>
 		<p class="lead">
 		<div id="showConnectionDiv"></div>

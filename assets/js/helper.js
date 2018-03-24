@@ -21,6 +21,10 @@ function getCookie(cname) {
     return "";
 }
 
+function deleteCookie(cookieName) {
+    document.cookie = cookieName + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
 function generateParamsUrl(user) {
     var parameters = ["UID","UIDSig","timestamp","loginProvider","loginProviderUID","nickname","photoURL","thumbnailURL","firstName","lastName","gender","birthDay","birthMonth","birthYear","email","country","state","city","zip","profileURL","proxiedEmail","providers"];
     var appendUrl = '';
@@ -101,8 +105,7 @@ function getConnections() {
 
 function displayConnections() {
     var currentConnections = getConnections();
-    document.getElementById('showCurrentConnections').innerHTML = currentConnections;
-
+    document.getElementById('showCurrentConnections').innerHTML = 'Please remember that you are currengly logged in with: ' + currentConnections;
 }
 
 function myOnLoad(evt) {
@@ -113,31 +116,3 @@ function myOnConnectionAdded(evt) {
     setConnections();
 }
 
-function showConnection() {
-    var context = {
-        msg:'This is my params.context.msg'
-    };
-
-    var params = {
-        captionText:'This is my caption text',
-        headerText:'Get Fully Connected!',
-        containerID: 'showConnectionDiv',
-        height: 100, // changing default add-on size
-        width: 520,  // changing default add-on size
-        UIConfig:'<config><body><texts color="white" size="20px"></texts><controls><snbuttons buttonsize="60"></snbuttons></controls><background background-color="transparent" frame-color="transparent"></background></body></config>',
-        showTermsLink:false,
-        showEditLink:false,
-        context:context
-    };
-
-    /*@todo event onLoad is not workin on addEventHandlers */
-    params['onLoad'] = myOnLoad;
-    gigya.socialize.addEventHandlers({
-            onConnectionAdded:myOnConnectionAdded,
-        }
-    )
-
-    gigya.socialize.showAddConnectionsUI(params);
-
-
-}
