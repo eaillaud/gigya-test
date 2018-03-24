@@ -18,7 +18,7 @@ function DisplayEventMessageLogin(eventObj) {
     setConnections(eventObj.user);
     var paramsUrl = generateParamsUrl(eventObj.user);
     var redirectUrl = "http://localhost:8085/b.html" + paramsUrl;
-    eventObj.user.email = '';
+    //eventObj.user.email = '';
     if (eventObj.user.email === '') {
         modal.style.display = "block";
         document.getElementById("confirmButton").onclick = function (ev) {
