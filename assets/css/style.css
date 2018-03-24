@@ -135,6 +135,15 @@ body {
     background-color: firebrick;
 }
 #simpleLogout:hover {
-    background-color: darkseagreen;
+    background-color: lightgreen;
 }
+#shareMe {
+    border-radius:30px;
+    background-color: darkblue;
+    color: white;
+}
+#shareMe:hover {
+    background-color: lightgreen;
+}
+
 

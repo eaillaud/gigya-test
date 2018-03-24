@@ -111,3 +111,25 @@ function myOnConnectionAdded(evt) {
     setConnections();
 }
 
+function shareMeNow(){
+    // Constructing a UserAction Object
+    var act = new gigya.socialize.UserAction();
+    act.setTitle("Hi friends! Try this amazing login NOW!");
+    act.setLinkBack("http://localhost:8085/a.html");
+    act.setDescription("This is my Description");   // Setting Description
+    act.addActionLink("Read More", "http://localhost:8085/a.html");  // Adding Action Link
+
+// Adding a Media Item (image)
+    act.addMediaItem( { type: 'image', src: 'https://demo.gigya.com/images/300x250_myoss_3frames-lg.gif', href: 'https://demo.gigya.com/about.php' });
+
+    var params =
+        {
+            userAction:act
+            ,showMoreButton: true // Enable the "More" button and screen
+            ,showEmailButton: true // Enable the "Email" button and screen
+        };
+
+// Show the "Share" dialog
+    gigya.socialize.showShareUI(params);
+}
+
