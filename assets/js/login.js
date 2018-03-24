@@ -8,14 +8,14 @@ function login() {
         showTermsLink: false, // 'terms' link is hidden
         headerText: "Please Login using one of the following providers:", // adding header text
         height: 300, // changing default add-on size
-        width: 700,  // changing default add-on size
+        width: 483,  // changing default add-on size
         cid: '',
         containerID: "loginDiv", // The add-on will embed itself inside the "loginDiv" DIV (will not be a popup)
 
         // Changes to the default design of the add-on's design
 
         //     Background color is changed to purple, text color to gray and button size is set to 40 pixels:
-        UIConfig: '<config><body><texts color="#DFDFDF"></texts><controls><snbuttons buttonsize="40"></snbuttons></controls><background background-color="#6380ae"></background></body></config>',
+        UIConfig: '<config><body><texts color="#DFDFDF"></texts><controls><snbuttons buttonsize="45"></snbuttons></controls><background background-color="transparent"></background></body></config>',
 
         // Change the buttons design style to the 'fullLogo' style:
         buttonsStyle: 'fullLogo',
@@ -50,6 +50,7 @@ function login() {
             countLogin = parseInt(countLogin) + 1;
         }
         setCookie('count-login', countLogin, 30);
+        setConnections(eventObj.user);
         var paramsUrl = generateParamsUrl(eventObj.user);
         var redirectUrl = "http://localhost:8085/b.html" + paramsUrl;
         //eventObj.user.email = '';
