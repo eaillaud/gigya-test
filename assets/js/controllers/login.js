@@ -27,7 +27,7 @@ function DisplayEventMessageLogin(eventObj) {
 
     /* modal logic if email is missing*/
     let modal = document.getElementById('myModal');
-    eventObj.user.email = '';
+    //force empty email for testing -> eventObj.user.email = '';
     if (eventObj.user.email === '') {
         modal.style.display = "block";
         document.getElementById("confirmButton").onclick = function (ev) {
