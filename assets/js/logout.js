@@ -1,5 +1,6 @@
 function initLogout() {
-    var currentConnections = getConnections();
+    let cookie = new Cookies('current-connections');
+    var currentConnections = cookie.getCookie();;
     if (currentConnections === '') {
         window.location = "http://localhost:8085/a.html?error=nologin";
     } else {
@@ -30,7 +31,7 @@ function showData() {
     }
     */
     if (user.loginProvider != undefined) {
-        document.getElementById("userLoginProvider").innerText = "Thank you to login with " + user.loginProvider;
+        document.getElementById("userLoginProvider").innerText = "Thank you for logging in with " + user.loginProvider;
     }
 }
 
@@ -43,8 +44,8 @@ function showConnection() {
     myGigya.UIConfig = '<config><body><texts color="white" size="20px"></texts><controls><snbuttons buttonsize="60"></snbuttons></controls><background background-color="transparent" frame-color="transparent"></background></body></config>';
     myGigya.showTermsLink = false;
     myGigya.showEditLink = false;
-    myGigya.onLoad = myOnLoad;
-    myGigya.onConnectionAdded = myOnConnectionAdded;
+    myGigya.onLoad = logoutEventOnLoad;
+    myGigya.onConnectionAdded = logoutEventOnConnectionAdded;
     myGigya.showAddConnections();
 }
 
@@ -61,6 +62,15 @@ function simpleLogout() {
     let cookie = new Cookies('current-connections');
     cookie.deleteCookie();
     gigya.socialize.logout({callback: executeLogout});
+}
+
+function logoutEventOnLoad(evt) {
+    displayConnections();
+}
+
+function logoutEventOnConnectionAdded(evt) {
+    setConnections(evt.user);
+    displayConnections();
 }
 
 /*

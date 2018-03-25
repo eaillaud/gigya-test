@@ -7,10 +7,10 @@ function initLogin() {
     }
 }
 
-function DisplayEventMessageLogin() {
+function DisplayEventMessageLogin(eventObj) {
     /* Update counter for login access */
     let cookie = new Cookies('count-login');
-    var countLogin = cookie.getCookie();
+    let countLogin = cookie.getCookie();
     if (countLogin === '') {
         countLogin = 1;
     } else {
@@ -21,14 +21,12 @@ function DisplayEventMessageLogin() {
     cookie.setCookie();
 
     /* Update current connected providers */
-    let currentConnections = User.getConnections(e.user);
-    cookie = new Cookies('current-connections', currentConnections, 30);
-    cookie.setCookie();
-    var paramsUrl = User.generateParamsUrl(e.user);
-    var redirectUrl = "http://localhost:8085/b.html" + paramsUrl;
+    setConnections(eventObj.user);
+    let paramsUrl = User.generateParamsUrl(eventObj.user);
+    let redirectUrl = "http://localhost:8085/b.html" + paramsUrl;
 
     /* modal logic if email is missing*/
-    var modal = document.getElementById('myModal');
+    let modal = document.getElementById('myModal');
     eventObj.user.email = '';
     if (eventObj.user.email === '') {
         modal.style.display = "block";
@@ -50,8 +48,11 @@ function login() {
     myGigya.containerID = "loginDiv";
     myGigya.UIConfig = '<config><body><texts color="#DFDFDF"></texts><controls><snbuttons buttonsize="45"></snbuttons></controls><background background-color="transparent"></background></body></config>';
     myGigya.buttonsStyle = 'fullLogo';
-    /* Add Event Handler*/
     myGigya.onLogin = DisplayEventMessageLogin;
+    /* Add Event Handler*/
+    /*gigya.socialize.addEventHandlers({
+        onLogin: DisplayEventMessageLogin
+    });*/
     /* Show Gigya Login*/
     myGigya.showLoginUI();
 }
