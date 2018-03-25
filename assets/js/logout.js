@@ -9,7 +9,8 @@ function initLogout() {
 }
 
 function showData() {
-    var user = getUrlData();
+    let user = new User();
+    user.fillDataUserFromUrl();
     if (user.firstName != undefined) {
         if (user.lastName != '') {
             document.getElementById("userName").innerText = user.firstName + ' ' + user.lastName;
@@ -19,36 +20,32 @@ function showData() {
     } else {
         document.getElementById("userName").innerText = "Gigya Friend!"
     }
-    /* if(user.photoURL != undefined) {
+    /*
+    @todo not working on localhost, img are not displayed, workaround: download locally and print them
+
+    if(user.photoURL != undefined) {
         var img = document.createElement("IMG");
         img.src = user.photoURL;
         document.getElementById('imageDiv').appendChild(img);
-    } */
+    }
+    */
     if (user.loginProvider != undefined) {
         document.getElementById("userLoginProvider").innerText = "Thank you to login with " + user.loginProvider;
     }
 }
 
 function showConnection() {
-
-    var params = {
-        headerText: 'Get Fully Connected!',
-        containerID: 'showConnectionDiv',
-        height: 100, // changing default add-on size
-        width: 520,  // changing default add-on size
-        UIConfig: '<config><body><texts color="white" size="20px"></texts><controls><snbuttons buttonsize="60"></snbuttons></controls><background background-color="transparent" frame-color="transparent"></background></body></config>',
-        showTermsLink: false,
-        showEditLink: false,
-    };
-
-    /*@todo event onLoad is not workin on addEventHandlers */
-    params['onLoad'] = myOnLoad;
-    gigya.socialize.addEventHandlers({
-            onConnectionAdded: myOnConnectionAdded,
-        }
-    )
-
-    gigya.socialize.showAddConnectionsUI(params);
+    let myGigya = new MyGigya();
+    myGigya.headerText = 'Get Fully Connected!';
+    myGigya.containerID = 'showConnectionDiv';
+    myGigya.height = 100;
+    myGigya.width = 520;
+    myGigya.UIConfig = '<config><body><texts color="white" size="20px"></texts><controls><snbuttons buttonsize="60"></snbuttons></controls><background background-color="transparent" frame-color="transparent"></background></body></config>';
+    myGigya.showTermsLink = false;
+    myGigya.showEditLink = false;
+    myGigya.onLoad = myOnLoad;
+    myGigya.onConnectionAdded = myOnConnectionAdded;
+    myGigya.showAddConnections();
 }
 
 function executeLogout(response) {
@@ -61,7 +58,8 @@ function executeLogout(response) {
 }
 
 function simpleLogout() {
-    deleteCookie('current-connections');
+    let cookie = new Cookies('current-connections');
+    cookie.deleteCookie();
     gigya.socialize.logout({callback: executeLogout});
 }
 

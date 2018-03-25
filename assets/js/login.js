@@ -1,24 +1,35 @@
 function initLogin() {
     loggedTimes();
-    var urlData = getUrlData();
-    if (urlData != '' && urlData['error'] === 'nologin') {
+    let user = new User();
+    user.fillDataUserFromUrl();
+    if (user != '' && user['error'] === 'nologin') {
         document.getElementById("errorLogin").style = "display:block";
     }
 }
 
-function DisplayEventMessageLogin(eventObj) {
-    var modal = document.getElementById('myModal');
-    var countLogin = getCookie('count-login');
+function DisplayEventMessageLogin() {
+    /* Update counter for login access */
+    let cookie = new Cookies('count-login');
+    var countLogin = cookie.getCookie();
     if (countLogin === '') {
         countLogin = 1;
     } else {
         countLogin = parseInt(countLogin) + 1;
     }
-    setCookie('count-login', countLogin, 30);
-    setConnections(eventObj.user);
-    var paramsUrl = generateParamsUrl(eventObj.user);
+    cookie.value = countLogin;
+    cookie.expiration = 30;
+    cookie.setCookie();
+
+    /* Update current connected providers */
+    let currentConnections = User.getConnections(e.user);
+    cookie = new Cookies('current-connections', currentConnections, 30);
+    cookie.setCookie();
+    var paramsUrl = User.generateParamsUrl(e.user);
     var redirectUrl = "http://localhost:8085/b.html" + paramsUrl;
-    //eventObj.user.email = '';
+
+    /* modal logic if email is missing*/
+    var modal = document.getElementById('myModal');
+    eventObj.user.email = '';
     if (eventObj.user.email === '') {
         modal.style.display = "block";
         document.getElementById("confirmButton").onclick = function (ev) {
@@ -31,38 +42,16 @@ function DisplayEventMessageLogin(eventObj) {
 
 function login() {
     document.getElementById("errorLogin").style = "display:none";
-    var context = {
-        msg: 'This is my params.context.msg'
-    };
-    var params = {
-        showTermsLink: false,
-        headerText: "Please Login using one of the following providers:",
-        height: 300,
-        width: 483,
-        cid: '',
-        containerID: "loginDiv",
-        UIConfig: '<config><body><texts color="#DFDFDF"></texts><controls><snbuttons buttonsize="45"></snbuttons></controls><background background-color="transparent"></background></body></config>',
-        buttonsStyle: 'fullLogo',
-        redirectURL: "",
-        context: context,
-    };
-    /*params['onLogin'] = function (evt) {
-        var countLogin = getCookie('count-login');
-        if (countLogin === '') {
-            countLogin = 1;
-        } else {
-            countLogin = parseInt(countLogin) + 1;
-        }
-        setCookie('count-login', countLogin, 30);
-        evt.user.email = '';
-        if (evt.user.email === '') {
-            modal.style.display = "block";
-        }
-    };*/
-
-    gigya.socialize.addEventHandlers({
-        onLogin: DisplayEventMessageLogin
-    });
-
-    gigya.socialize.showLoginUI(params);
+    let myGigya = new MyGigya();
+    myGigya.showTermsLink = false;
+    myGigya.headerText = "Please Login using one of the following providers:";
+    myGigya.height = 300;
+    myGigya.width = 483;
+    myGigya.containerID = "loginDiv";
+    myGigya.UIConfig = '<config><body><texts color="#DFDFDF"></texts><controls><snbuttons buttonsize="45"></snbuttons></controls><background background-color="transparent"></background></body></config>';
+    myGigya.buttonsStyle = 'fullLogo';
+    /* Add Event Handler*/
+    myGigya.onLogin = DisplayEventMessageLogin;
+    /* Show Gigya Login*/
+    myGigya.showLoginUI();
 }
