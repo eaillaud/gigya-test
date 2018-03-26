@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="assets/images/favicon-16x16.png">
     <link rel="stylesheet" href="https://getbootstrap.com/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script type="text/javascript" src="assets/js/helper.js"></script>
-    <script type="text/javascript" src="assets/js/controllers/logout.js"></script>
+    <script type="text/javascript" src="assets/js/logout.js"></script>
     <script type="text/javascript" src="assets/js/models/User.js"></script>
     <script type="text/javascript" src="assets/js/controllers/Cookies.js"></script>
     <script type="text/javascript" src="assets/js/controllers/MyGigya.js"></script>
@@ -18,24 +19,28 @@
 <body class="text-center" onload="initLogout()">
 
 <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+
     <header class="masthead mb-auto">
         <div class="inner">
             <h5 class="masthead-brand"></h5>
             <nav class="nav nav-masthead justify-content-center"></nav>
         </div>
     </header>
+
     <main role="main" class="inner cover">
         <h1 class="cover-heading">Welcome
             <div id="userName"></div>
         </h1>
-        <!-- <p class="lead"><div id="imageDiv"></div></p> -->
+        <!-- Not working for localhost <p class="lead"><div id="imageDiv"></div></p> -->
         <p class="lead" id="userLoginProvider"></p>
         <p class="lead" id="showCurrentConnections"></p>
+        <p class="alert alert-info" id="showNewConnection" style="display: none"></p>
         <p class="lead">
-            <input type="button" class="btn btn-lg btn-secondary" onclick="simpleLogout()" value="Simple Logout"
+            <input type="button" class="btn btn-lg btn-secondary" onclick="simpleLogout();" value="Simple Logout"
                    id="simpleLogout">
             <!-- <input type="button" class="btn btn-lg btn-secondary" onclick="fullLogout()" value="Full Logout" id="fullLogout"> -->
         </p>
+        <p class="lead" id="showLoading" style="display: none"><img src="assets/images/loading.gif" /></p>
         <p class="lead">
         <div id="showConnectionDiv"></div>
         </p>
@@ -47,7 +52,7 @@
 
     <footer class="mastfoot mt-auto">
         <div class="inner">
-            <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap4Gigya</a></p>
+            <p>Cover template for <a href="https://getbootstrap.com/">TestGigya</a></p>
         </div>
     </footer>
 </div>

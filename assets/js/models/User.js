@@ -7,6 +7,9 @@ class User {
         }
     }
 
+    /**
+     * Take url and define User properties
+     */
     fillDataUserFromUrl() {
         let urlParamsArr = {};
         let urlParams = document.location.search.substr(1).split("&");
@@ -17,6 +20,11 @@ class User {
         }
     }
 
+    /**
+     * Generate Url from evt.User info retrieved from Gigya response
+     * @param user
+     * @returns {string}
+     */
     static generateParamsUrl(user) {
         let parameters = ["UID", "UIDSig", "timestamp", "loginProvider", "loginProviderUID", "nickname", "photoURL", "thumbnailURL", "firstName", "lastName", "gender", "birthDay", "birthMonth", "birthYear", "email", "country", "state", "city", "zip", "profileURL", "proxiedEmail", "providers"];
         let appendUrl = '';
@@ -53,6 +61,11 @@ class User {
             + eventObj.user.providers;*/
     }
 
+    /**
+     * Get providers from Gigya and transform array in string to store it in cookie
+     * @param user
+     * @returns {string}
+     */
     static getConnections(user) {
         let result = '';
         let providers = user.providers;

@@ -1,3 +1,6 @@
+/**
+ * Initialize Login
+ */
 function initLogin() {
     loggedTimes();
     let user = new User();
@@ -7,6 +10,11 @@ function initLogin() {
     }
 }
 
+/**
+ * Function for persisting information (login counter,connected providers) - show modal if email is missing
+ * @param eventObj
+ * @constructor
+ */
 function DisplayEventMessageLogin(eventObj) {
     /* Update counter for login access */
     let cookie = new Cookies('count-login');
@@ -38,6 +46,9 @@ function DisplayEventMessageLogin(eventObj) {
     }
 }
 
+/**
+ * Function that use Gigya Login
+ */
 function login() {
     document.getElementById("errorLogin").style = "display:none";
     let myGigya = new MyGigya();

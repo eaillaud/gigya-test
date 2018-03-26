@@ -1,6 +1,9 @@
+/**
+ * Initialize logout
+ */
 function initLogout() {
     let cookie = new Cookies('current-connections');
-    var currentConnections = cookie.getCookie();;
+    let currentConnections = cookie.getCookie();
     if (currentConnections === '') {
         window.location = "http://localhost:8085/a.html?error=nologin";
     } else {
@@ -9,6 +12,9 @@ function initLogout() {
     }
 }
 
+/**
+ * Show user data present in url parameters
+ */
 function showData() {
     let user = new User();
     user.fillDataUserFromUrl();
@@ -35,6 +41,9 @@ function showData() {
     }
 }
 
+/**
+ * Function to display available connection (use Gigya)
+ */
 function showConnection() {
     let myGigya = new MyGigya();
     myGigya.headerText = 'Get Fully Connected!';
@@ -49,6 +58,10 @@ function showConnection() {
     myGigya.showAddConnections();
 }
 
+/**
+ * Callback for logout
+ * @param response
+ */
 function executeLogout(response) {
     if (response.errorCode == 0) {
         window.location = "http://localhost:8085/a.html"
@@ -58,21 +71,48 @@ function executeLogout(response) {
     }
 }
 
+/**
+ * Execute logout from Gigya
+ */
 function simpleLogout() {
+    showLoading();
     let cookie = new Cookies('current-connections');
     cookie.deleteCookie();
     gigya.socialize.logout({callback: executeLogout});
 }
 
+/**
+ * When gigya is onLoad show the connections updated
+ * @param evt
+ */
 function logoutEventOnLoad(evt) {
     displayConnections();
 }
 
+/**
+ * When adding new Connection update info and cookies and show a new div with the new connection added
+ * @param evt
+ */
 function logoutEventOnConnectionAdded(evt) {
+    let currentConnections = new Cookies('current-connections').getCookie();
+    let currentConnectionsArray = currentConnections.split(",");
+    let allProviders = User.getConnections(evt.user);
+    let newProvider = getNewProvider(currentConnectionsArray,allProviders);
     setConnections(evt.user);
     displayConnections();
+    displayNewConnection(newProvider)
 }
 
+/**
+ * called by logoutEventOnConnectionAdded - needed to display the div with new provider added
+ * @param newProvider
+ */
+function displayNewConnection(newProvider) {
+    document.getElementById("showNewConnection").innerText = "Amazing! You added a new connection to " + newProvider;
+    $( "#showNewConnection" ).show( "slow", function() {
+        // Animation complete.
+    });
+}
 /*
 function fullLogout(){
     var uid = getCookie('gigya-uid');
