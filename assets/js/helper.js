@@ -46,7 +46,7 @@ function replaceString(oldS, newS, fullS) {
 }
 
 /**
- * Get new provider, iterates arreay of new provider and take the one not present in the cookie
+ * Get new provider, iterates array of new provider and take the one not present in the cookie
  * @param currentConnectionsArray
  * @param allProviders
  * @returns {*}
@@ -54,9 +54,10 @@ function replaceString(oldS, newS, fullS) {
 function getNewProvider(currentConnectionsArray,allProviders) {
     for (let i = 0; i < currentConnectionsArray.length; ++i) {
         allProviders = replaceString(currentConnectionsArray[i],"",allProviders);
+        allProviders = replaceString(',',"",allProviders);
+
     }
-    let result = replaceString(',',"",allProviders);
-    return result;
+    return allProviders;
 }
 
 function showLoading() {
